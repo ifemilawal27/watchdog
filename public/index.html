@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Watchdog — Risk Intelligence Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --panel: #131822;
+    --border: #232b38;
+    --text: #e6e9ef;
+    --muted: #8b94a3;
+    --green: #22c55e;
+    --red: #ef4444;
+    --accent: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 32px; }
+  .mono { font-family: "SF Mono", "Consolas", monospace; }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+  .brand p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .card .label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .card .value { font-size: 22px; font-weight: 600; }
+  .value.green { color: var(--green); }
+  .value.red { color: var(--red); }
+  .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .panel h2 { font-size: 15px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 500; padding: 8px 6px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 6px; border-bottom: 1px solid var(--border); }
+  .side-buy { color: var(--green); font-weight: 600; }
+  .side-sell { color: var(--red); font-weight: 600; }
+  form { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .row { display: flex; gap: 10px; }
+  select, input, button { background: #0d121b; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 14px; flex: 1; }
+  button { background: var(--accent); border: none; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  button:hover { opacity: 0.9; }
+  .empty { color: var(--muted); font-size: 13px; padding: 20px 0; text-align: center; }
+  .msg { font-size: 13px; margin-top: 8px; }
+  .msg.error { color: var(--red); }
+  .msg.success { color: var(--green); }
+
+  .risk-badge {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+  font-family: "SF Mono", "Consolas", monospace;
+}
+.risk-low { background: rgba(34,197,94,0.15); color: var(--green); border: 2px solid var(--green); }
+.risk-moderate { background: rgba(234,179,8,0.15); color: #eab308; border: 2px solid #eab308; }
+.risk-high { background: rgba(239,68,68,0.15); color: var(--red); border: 2px solid var(--red); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <i data-lucide="shield" style="color: var(--accent);"></i>
+    <div>
+      <h1>WATCHDOG</h1>
+      <p>AI Risk Intelligence for Paper Trading</p>
+    </div>
+  </div>
+  <div class="status"><span class="dot"></span> Live — Bitget Market Data</div>
+</header>
+
+<div class="stats">
+  <div class="card">
+    <div class="label"><i data-lucide="wallet" width="14"></i> Cash Balance</div>
+    <div class="value mono" id="stat-balance">--</div>
+  </div>
+  <div class="card">
+    <div class="label"><i data-lucide="layers" width="14"></i> Total Equity</div>
+    <div class="value mono" id="stat-equity">--</div>
+  </div>
+  <div class="card">
+    <div class="label"><i data-lucide="trending-up" width="14"></i> Open P&amp;L</div>
+    <div class="value mono" id="stat-pnl">--</div>
+  </div>
+  <div class="card">
+    <div class="label"><i data-lucide="history" width="14"></i> Total Trades</div>
+    <div class="value mono" id="stat-trades">--</div>
+  </div>
+</div>
+
+<div class="panel" id="risk-panel" style="display:none; margin-bottom:20px;">
+  <h2><i data-lucide="shield-alert" width="16"></i> AI Risk Analysis</h2>
+  <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
+    <div id="risk-score-badge" class="risk-badge">--</div>
+    <div id="risk-label" style="font-weight:600;"></div>
+  </div>
+  <p id="risk-explanation" style="color: var(--muted); font-size:14px; line-height:1.5; margin-bottom:12px;"></p>
+  <button id="toggle-reasoning" type="button" style="background:none; border:1px solid var(--border); color:var(--muted); font-size:12px; padding:6px 12px; flex:none; width:auto;">
+    <i data-lucide="brain" width="14"></i> View AI's Full Reasoning
+  </button>
+  <pre id="risk-reasoning" class="mono" style="display:none; margin-top:12px; padding:12px; background:#0d121b; border-radius:8px; font-size:11px; color:var(--muted); white-space:pre-wrap; max-height:200px; overflow-y:auto;"></pre>
+  <div class="row" style="margin-top:16px;">
+    <button id="confirm-trade" type="button" style="background:var(--green);"><i data-lucide="check" width="16"></i> Confirm Trade</button>
+    <button id="cancel-trade" type="button" style="background:#374151;"><i data-lucide="x" width="16"></i> Cancel</button>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="panel">
+    <h2><i data-lucide="briefcase" width="16"></i> Open Positions</h2>
+    <table>
+      <thead><tr><th>Asset</th><th>Size</th><th>Avg Entry</th><th>Current</th><th>P&amp;L</th></tr></thead>
+      <tbody id="positions-body"></tbody>
+    </table>
+    <div id="positions-empty" class="empty" style="display:none;">No open positions yet.</div>
+
+    <form id="trade-form">
+      <div class="row">
+        <select id="trade-side">
+          <option value="buy">Buy</option>
+          <option value="sell">Sell</option>
+        </select>
+        <input type="number" id="trade-size" placeholder="Size (e.g. 0.05)" step="0.0001" min="0.0001" required>
+      </div>
+      <button type="submit"><i data-lucide="zap" width="16"></i> Analyze Trade (BTC/USDT)</button>
+      <div id="trade-msg" class="msg"></div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h2><i data-lucide="list" width="16"></i> Trade History</h2>
+    <table>
+      <thead><tr><th>Time</th><th>Side</th><th>Price</th><th>Size</th></tr></thead>
+      <tbody id="trades-body"></tbody>
+    </table>
+    <div id="trades-empty" class="empty" style="display:none;">No trades logged yet.</div>
+  </div>
+</div>
+
+<script>
+  let livePrice = 0;
+
+  function formatUSD(n) {
+    return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  async function fetchPrice() {
+    const res = await fetch("/api/price/BTCUSDT");
+    const data = await res.json();
+    livePrice = parseFloat(data.data[0].lastPr);
+    return livePrice;
+  }
+
+  async function refresh() {
+    const price = await fetchPrice();
+    const res = await fetch("/api/portfolio");
+    const portfolio = await res.json();
+
+    document.getElementById("stat-balance").textContent = formatUSD(portfolio.balance);
+    document.getElementById("stat-trades").textContent = portfolio.trades.length;
+
+    let totalEquity = portfolio.balance;
+    let totalPnl = 0;
+
+    const positionsBody = document.getElementById("positions-body");
+    positionsBody.innerHTML = "";
+    const symbols = Object.keys(portfolio.positions);
+    document.getElementById("positions-empty").style.display = symbols.length ? "none" : "block";
+
+    symbols.forEach(symbol => {
+      const pos = portfolio.positions[symbol];
+      const currentValue = pos.size * price;
+      const costBasis = pos.size * pos.avgEntryPrice;
+      const pnl = currentValue - costBasis;
+      totalEquity += currentValue;
+      totalPnl += pnl;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${symbol}</td>
+        <td class="mono">${pos.size}</td>
+        <td class="mono">${formatUSD(pos.avgEntryPrice)}</td>
+        <td class="mono">${formatUSD(price)}</td>
+        <td class="mono ${pnl >= 0 ? "side-buy" : "side-sell"}">${pnl >= 0 ? "+" : ""}${formatUSD(pnl)}</td>
+      `;
+      positionsBody.appendChild(row);
+    });
+
+    document.getElementById("stat-equity").textContent = formatUSD(totalEquity);
+    const pnlEl = document.getElementById("stat-pnl");
+    pnlEl.textContent = (totalPnl >= 0 ? "+" : "") + formatUSD(totalPnl);
+    pnlEl.className = "value mono " + (totalPnl >= 0 ? "green" : "red");
+
+    const tradesBody = document.getElementById("trades-body");
+    tradesBody.innerHTML = "";
+    const recentTrades = [...portfolio.trades].reverse().slice(0, 10);
+    document.getElementById("trades-empty").style.display = recentTrades.length ? "none" : "block";
+
+    recentTrades.forEach(t => {
+      const row = document.createElement("tr");
+      const time = new Date(t.timestamp).toLocaleString();
+      row.innerHTML = `
+        <td>${time}</td>
+        <td class="${t.side === "buy" ? "side-buy" : "side-sell"}">${t.side.toUpperCase()}</td>
+        <td class="mono">${formatUSD(t.price)}</td>
+        <td class="mono">${t.size}</td>
+      `;
+      tradesBody.appendChild(row);
+    });
+
+    lucide.createIcons();
+  }
+
+  let pendingTrade = null;
+
+document.getElementById("trade-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const side = document.getElementById("trade-side").value;
+  const size = parseFloat(document.getElementById("trade-size").value);
+  const msgEl = document.getElementById("trade-msg");
+  msgEl.textContent = "Running AI risk analysis...";
+  msgEl.className = "msg";
+
+  const price = await fetchPrice();
+  pendingTrade = { symbol: "BTCUSDT", side, price, size };
+
+  const res = await fetch("/api/risk-analysis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(pendingTrade)
+  });
+  const result = await res.json();
+  const analysis = result.analysis;
+
+  msgEl.textContent = "";
+  const score = analysis.riskScore;
+  const badge = document.getElementById("risk-score-badge");
+  const label = document.getElementById("risk-label");
+  badge.textContent = score;
+  badge.className = "risk-badge " + (score <= 3 ? "risk-low" : score <= 6 ? "risk-moderate" : "risk-high");
+  label.textContent = (score <= 3 ? "Low Risk" : score <= 6 ? "Moderate Risk" : "High Risk");
+  label.style.color = score <= 3 ? "var(--green)" : score <= 6 ? "#eab308" : "var(--red)";
+
+  document.getElementById("risk-explanation").textContent = analysis.explanation;
+  document.getElementById("risk-reasoning").textContent = analysis.fullReasoning;
+  document.getElementById("risk-panel").style.display = "block";
+  lucide.createIcons();
+});
+
+document.getElementById("toggle-reasoning").addEventListener("click", () => {
+  const el = document.getElementById("risk-reasoning");
+  el.style.display = el.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("confirm-trade").addEventListener("click", async () => {
+  if (!pendingTrade) return;
+  const res = await fetch("/api/trade", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(pendingTrade)
+  });
+  const result = await res.json();
+  const msgEl = document.getElementById("trade-msg");
+
+  if (result.success) {
+    msgEl.textContent = "Trade executed successfully.";
+    msgEl.className = "msg success";
+    document.getElementById("trade-size").value = "";
+    document.getElementById("risk-panel").style.display = "none";
+    pendingTrade = null;
+    refresh();
+  } else {
+    msgEl.textContent = result.message;
+    msgEl.className = "msg error";
+  }
+});
+
+document.getElementById("cancel-trade").addEventListener("click", () => {
+  document.getElementById("risk-panel").style.display = "none";
+  pendingTrade = null;
+});
+
+  refresh();
+  lucide.createIcons();
+  setInterval(refresh, 15000);
+</script>
+</body>
+</html>

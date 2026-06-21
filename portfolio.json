@@ -1,0 +1,47 @@
+{
+  "balance": 2338.315095,
+  "positions": {
+    "BTCUSDT": {
+      "size": 0.1205,
+      "avgEntryPrice": 63582.447344398344
+    }
+  },
+  "trades": [
+    {
+      "id": 1782077643085,
+      "timestamp": "2026-06-21T21:34:03.085Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63534.7,
+      "size": 0.1,
+      "balanceAfter": 3646.5299999999997
+    },
+    {
+      "id": 1782078401015,
+      "timestamp": "2026-06-21T21:46:41.015Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63862.45,
+      "size": 0.01,
+      "balanceAfter": 3007.9055
+    },
+    {
+      "id": 1782081103376,
+      "timestamp": "2026-06-21T22:31:43.376Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63774.99,
+      "size": 0.01,
+      "balanceAfter": 2370.1556
+    },
+    {
+      "id": 1782081742041,
+      "timestamp": "2026-06-21T22:42:22.041Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63681.01,
+      "size": 0.0005,
+      "balanceAfter": 2338.315095
+    }
+  ]
+}
