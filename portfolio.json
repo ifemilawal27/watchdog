@@ -1,9 +1,9 @@
 {
-  "balance": 2338.315095,
+  "balance": 2382.510893,
   "positions": {
     "BTCUSDT": {
-      "size": 0.1205,
-      "avgEntryPrice": 63582.447344398344
+      "size": 0.1198,
+      "avgEntryPrice": 63585.380749161064
     }
   },
   "trades": [
@@ -42,6 +42,78 @@
       "price": 63681.01,
       "size": 0.0005,
       "balanceAfter": 2338.315095
+    },
+    {
+      "id": 1782173484933,
+      "timestamp": "2026-06-23T00:11:24.933Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63938.98,
+      "size": 0.0001,
+      "balanceAfter": 2331.921197
+    },
+    {
+      "id": 1782175078766,
+      "timestamp": "2026-06-23T00:37:58.766Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63984.74,
+      "size": 0.0005,
+      "balanceAfter": 2299.928827
+    },
+    {
+      "id": 1782175095727,
+      "timestamp": "2026-06-23T00:38:15.727Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63987.39,
+      "size": 0.0005,
+      "balanceAfter": 2267.935132
+    },
+    {
+      "id": 1782175116940,
+      "timestamp": "2026-06-23T00:38:36.940Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 63970,
+      "size": 0.0001,
+      "balanceAfter": 2261.538132
+    },
+    {
+      "id": 1782175171104,
+      "timestamp": "2026-06-23T00:39:31.104Z",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "price": 64003.44,
+      "size": 0.0005,
+      "balanceAfter": 2293.5398520000003
+    },
+    {
+      "id": 1782175212104,
+      "timestamp": "2026-06-23T00:40:12.104Z",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "price": 64014.99,
+      "size": 0.001,
+      "balanceAfter": 2357.5548420000005
+    },
+    {
+      "id": 1782213272928,
+      "timestamp": "2026-06-23T11:14:32.928Z",
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "price": 62389.99,
+      "size": 0.0001,
+      "balanceAfter": 2351.3158430000003
+    },
+    {
+      "id": 1782213301618,
+      "timestamp": "2026-06-23T11:15:01.618Z",
+      "symbol": "BTCUSDT",
+      "side": "sell",
+      "price": 62390.1,
+      "size": 0.0005,
+      "balanceAfter": 2382.510893
     }
   ]
 }
