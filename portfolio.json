@@ -1,9 +1,21 @@
 {
-  "balance": 2382.510893,
+  "balance": 2352.041863,
   "positions": {
     "BTCUSDT": {
       "size": 0.1198,
       "avgEntryPrice": 63585.380749161064
+    },
+    "SOLUSDT": {
+      "size": 0.001,
+      "avgEntryPrice": 69.01
+    },
+    "BNBUSDT": {
+      "size": 0.05,
+      "avgEntryPrice": 574.6
+    },
+    "ETHUSDT": {
+      "size": 0.001,
+      "avgEntryPrice": 1670.02
     }
   },
   "trades": [
@@ -114,6 +126,33 @@
       "price": 62390.1,
       "size": 0.0005,
       "balanceAfter": 2382.510893
+    },
+    {
+      "id": 1782236454330,
+      "timestamp": "2026-06-23T17:40:54.330Z",
+      "symbol": "SOLUSDT",
+      "side": "buy",
+      "price": 69.01,
+      "size": 0.001,
+      "balanceAfter": 2382.441883
+    },
+    {
+      "id": 1782236613278,
+      "timestamp": "2026-06-23T17:43:33.278Z",
+      "symbol": "BNBUSDT",
+      "side": "buy",
+      "price": 574.6,
+      "size": 0.05,
+      "balanceAfter": 2353.711883
+    },
+    {
+      "id": 1782262651840,
+      "timestamp": "2026-06-24T00:57:31.840Z",
+      "symbol": "ETHUSDT",
+      "side": "buy",
+      "price": 1670.02,
+      "size": 0.001,
+      "balanceAfter": 2352.041863
     }
   ]
 }

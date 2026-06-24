@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1782262646701,
+    "timestamp": "2026-06-24T00:57:26.701Z",
+    "symbol": "ETHUSDT",
+    "side": "buy",
+    "price": 1670.02,
+    "size": 0.001,
+    "riskScore": 2,
+    "explanation": "The RSI of 68.23 is just below the typical overbought threshold, indicating limited upside pressure, and the price is only 0.31% above the 20‑period average, showing no strong breakout. Low recent volatility (0.56%) and the very small position relative to the cash balance further keep the risk low.",
+    "rsi": "68.23",
+    "trend": "0.31",
+    "volatility": "0.56"
+  },
+  {
+    "id": 1782262621743,
+    "timestamp": "2026-06-24T00:57:01.743Z",
+    "symbol": "ETHUSDT",
+    "side": "sell",
+    "price": 1670.16,
+    "size": 0.0001,
+    "riskScore": 3,
+    "explanation": "The RSI of 67.74 indicates ETH is nearing overbought levels, which could prompt a modest pull‑back supporting a sell. However, the price is only 0.27% above its 20‑period average and recent volatility is low at 0.56%, suggesting limited upside and a stable market, and the trade size ($0.17) is negligible relative to the $2,353.71 cash balance, resulting in low overall risk.",
+    "rsi": "67.74",
+    "trend": "0.27",
+    "volatility": "0.56"
+  },
+  {
+    "id": 1782262558163,
+    "timestamp": "2026-06-24T00:55:58.163Z",
+    "symbol": "ETHUSDT",
+    "side": "sell",
+    "price": 1670.85,
+    "size": 0.01,
+    "riskScore": 3,
+    "explanation": "The RSI of 68.48 signals the market is nearing overbought, hinting at a possible short‑term pull‑back that supports a sell position. The price is only 0.34% above the 20‑period average and recent volatility is low at 0.56%, indicating a relatively stable price environment with limited upside. Additionally, the very small trade size (0.01 ETH) relative to the cash balance keeps the exposure minimal, resulting in modest overall risk.",
+    "rsi": "68.48",
+    "trend": "0.34",
+    "volatility": "0.56"
+  },
+  {
+    "id": 1782236604509,
+    "timestamp": "2026-06-23T17:43:24.509Z",
+    "symbol": "BNBUSDT",
+    "side": "buy",
+    "price": 574.6,
+    "size": 0.05,
+    "riskScore": 3,
+    "explanation": "The RSI of 17.6 shows BNB is deeply oversold, suggesting a possible rebound but also indicating lingering bearish pressure. The price is only 1.09% below its 20‑period average and recent volatility is low (0.42%), implying modest price swings, and the small trade size (~1% of the portfolio) further limits exposure.",
+    "rsi": "17.60",
+    "trend": "-1.09",
+    "volatility": "0.42"
+  },
+  {
+    "id": 1782236500080,
+    "timestamp": "2026-06-23T17:41:40.080Z",
+    "symbol": "BNBUSDT",
+    "side": "sell",
+    "price": 574.7,
+    "size": 0.0001,
+    "riskScore": 8,
+    "explanation": "The 14‑period RSI of 17.67 indicates the asset is deeply oversold, raising the likelihood of a short‑term rebound that would hurt a sell position. Although the price is only 1.07% below its 20‑period average and recent volatility is low at 0.42%, these factors do not offset the reversal risk, leading to a relatively high risk rating.",
+    "rsi": "17.67",
+    "trend": "-1.07",
+    "volatility": "0.42"
+  },
+  {
+    "id": 1782236433911,
+    "timestamp": "2026-06-23T17:40:33.911Z",
+    "symbol": "SOLUSDT",
+    "side": "buy",
+    "price": 69.01,
+    "size": 0.001,
+    "riskScore": 2,
+    "explanation": "The position size is minuscule ($0.07) relative to the $2,382.51 cash balance, making any potential loss negligible. While the low RSI (20.51) and price 1.72% below the 20‑period average suggest the asset may be oversold and ready to rebound, the very low recent volatility (0.65%) indicates limited short‑term price swings, keeping overall risk low.",
+    "rsi": "20.51",
+    "trend": "-1.72",
+    "volatility": "0.65"
+  }
+]
