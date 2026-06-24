@@ -1,5 +1,5 @@
 {
-  "balance": 2352.041863,
+  "balance": 2281.4818627606,
   "positions": {
     "BTCUSDT": {
       "size": 0.1198,
@@ -16,6 +16,10 @@
     "ETHUSDT": {
       "size": 0.001,
       "avgEntryPrice": 1670.02
+    },
+    "XRPUSDT": {
+      "size": 65.104263,
+      "avgEntryPrice": 1.0838
     }
   },
   "trades": [
@@ -153,6 +157,15 @@
       "price": 1670.02,
       "size": 0.001,
       "balanceAfter": 2352.041863
+    },
+    {
+      "id": 1782299363011,
+      "timestamp": "2026-06-24T11:09:23.011Z",
+      "symbol": "XRPUSDT",
+      "side": "buy",
+      "price": 1.0838,
+      "size": 65.104263,
+      "balanceAfter": 2281.4818627606
     }
   ]
 }

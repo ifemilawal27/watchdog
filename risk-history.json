@@ -1,5 +1,31 @@
 [
   {
+    "id": 1782299489827,
+    "timestamp": "2026-06-24T11:11:29.827Z",
+    "symbol": "XRPUSDT",
+    "side": "sell",
+    "price": 1.0847,
+    "size": 63.095787,
+    "riskScore": 6,
+    "explanation": "The 14‑period RSI of 28.48 shows XRP is oversold, implying a potential upward reversal that makes a sell position riskier. However, the price is 1.56 % below its 20‑period average and recent volatility is only 0.47 %, indicating limited downside momentum and modest price swings. Additionally, the trade size ($68.44) is a small fraction of the $2,281.48 cash balance, which further tempers the overall risk.",
+    "rsi": "28.48",
+    "trend": "-1.56",
+    "volatility": "0.47"
+  },
+  {
+    "id": 1782299362988,
+    "timestamp": "2026-06-24T11:09:22.988Z",
+    "symbol": "XRPUSDT",
+    "side": "buy",
+    "price": 1.0838,
+    "size": 65.104263,
+    "riskScore": 4,
+    "explanation": "The low RSI of 27.94 indicates XRP is oversold, implying a possible bounce but also susceptibility to further downside. Combined with a price 1.64% below its 20‑period average, modest recent volatility (0.47%), and a small position size (~3% of cash), the trade carries moderate‑low risk.",
+    "rsi": "27.94",
+    "trend": "-1.64",
+    "volatility": "0.47"
+  },
+  {
     "id": 1782262646701,
     "timestamp": "2026-06-24T00:57:26.701Z",
     "symbol": "ETHUSDT",

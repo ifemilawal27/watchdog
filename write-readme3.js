@@ -1,4 +1,6 @@
-# Watchdog — AI-Powered Trading Infrastructure for Bitget Agent Hub
+const fs = require("fs");
+
+const content = `# Watchdog — AI-Powered Trading Infrastructure for Bitget Agent Hub
 
 **Bitget AI Hackathon S1 | Track: Trading Infra**
 **Repository:** https://github.com/ifemilawal27/watchdog
@@ -244,3 +246,7 @@ The agent is fully risk-gated: no trade executes without passing the AI risk che
 - Multi-session portfolio with charted equity curve
 - Integration with Bitget Agent Hub MCP server for Claude Code compatibility
 - Alert delivery via Telegram or email webhook
+`;
+
+fs.writeFileSync("README.md", content, "utf8");
+console.log("README.md written. Size: " + fs.statSync("README.md").size + " bytes");
